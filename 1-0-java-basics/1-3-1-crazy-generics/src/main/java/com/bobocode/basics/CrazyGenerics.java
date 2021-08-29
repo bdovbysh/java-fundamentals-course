@@ -148,7 +148,6 @@ public class CrazyGenerics {
          * @param list
          */
         public static void print(List<?> list) {
-            // todo: refactor it so the list of any type can be printed, not only integers
             list.forEach(element -> System.out.println(" – " + element));
         }
 
@@ -231,7 +230,6 @@ public class CrazyGenerics {
          * @param <T>      entity type
          * @return an entity from the given collection that has the max createdOn value
          */
-        // todo: create a method according to JavaDoc and implement it using previous method
 
         public static <T extends BaseEntity> T findMostRecentlyCreatedEntity(Collection<T> entities) {
            return findMax(entities, CREATED_ON_COMPARATOR).orElseThrow(() -> new NoSuchElementException());
