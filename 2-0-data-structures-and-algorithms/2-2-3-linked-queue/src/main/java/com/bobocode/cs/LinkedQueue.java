@@ -11,13 +11,25 @@ import com.bobocode.util.ExerciseNotCompletedException;
  */
 public class LinkedQueue<T> implements Queue<T> {
 
+    private Node<T> head;
+    private Node<T> tail;
+    private int size = 0;
+
     /**
      * Adds an element to the end of the queue.
      *
      * @param element the element to add
      */
     public void add(T element) {
-        throw new ExerciseNotCompletedException(); // todo: implement this method
+        Node<T> node = new Node(element);
+        if (head == null) {
+            head = node;
+            tail = node;
+        }
+        else {
+            tail.setNext(node);
+        }
+        size++;
     }
 
     /**
@@ -26,7 +38,21 @@ public class LinkedQueue<T> implements Queue<T> {
      * @return an element that was retrieved from the head or null if queue is empty
      */
     public T poll() {
-        throw new ExerciseNotCompletedException(); // todo: implement this method
+
+        if (head == null) {
+            return null;
+        }
+        var value = head.getValue();
+
+        head = head.getNext();
+
+        if (head == null) {
+            tail = null;
+        }
+
+        size--;
+
+        return value;
     }
 
     /**
@@ -35,7 +61,7 @@ public class LinkedQueue<T> implements Queue<T> {
      * @return an integer value that is a size of queue
      */
     public int size() {
-        throw new ExerciseNotCompletedException(); // todo: implement this method
+        return size;
     }
 
     /**
@@ -44,6 +70,32 @@ public class LinkedQueue<T> implements Queue<T> {
      * @return {@code true} if the queue is empty, returns {@code false} if it's not
      */
     public boolean isEmpty() {
-        throw new ExerciseNotCompletedException(); // todo: implement this method
+       return size == 0;
+    }
+
+    private static class Node<T> {
+
+        private T value;
+        private Node<T> next;
+
+        public Node(T value) {
+            this.value = value;
+        }
+
+        public T getValue() {
+            return value;
+        }
+
+        public void setValue(T value) {
+            this.value = value;
+        }
+
+        public Node<T> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<T> next) {
+            this.next = next;
+        }
     }
 }
